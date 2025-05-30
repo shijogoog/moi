@@ -1,90 +1,485 @@
+# ==============================================================
+#  VIDEO PORTFOLIO – VERSION “V2 FULL” (static, vanilla stack)
+#  Tous les fichiers sont listés ci-dessous dans un SEUL bloc.
+#  Copie/colle chaque section dans le fichier indiqué par l’en-tête.
+# ==============================================================
+
+
+
+================================================================
+video-portfolio/index.html
+================================================================
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mon Portfolio Vidéo</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      background-color: #111;
-      color: white;
-    }
-    header {
-      padding: 2rem;
-      text-align: center;
-      background: #222;
-    }
-    h1 {
-      margin: 0;
-      font-size: 2.5rem;
-    }
-    p {
-      color: #ccc;
-    }
-    .videos {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      padding: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .video {
-      background: #1e1e1e;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 0 20px rgba(255,255,255,0.05);
-      transition: transform 0.3s ease;
-    }
-    .video:hover {
-      transform: scale(1.03);
-    }
-    iframe {
-      width: 100%;
-      height: 200px;
-      border: none;
-      display: block;
-    }
-    footer {
-      text-align: center;
-      padding: 2rem;
-      background: #222;
-      font-size: 0.9rem;
-      color: #777;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>Learn · Monteur Vidéo</title>
+
+  <meta name="viewport"          content="width=device-width, initial-scale=1.0">
+  <meta name="description"       content="Portfolio de Learn, monteur vidéo freelance basé à Lomé.">
+  <link rel="stylesheet"         href="css/style.css">
+  <link rel="manifest"           href="manifest.webmanifest">
+  <link rel="preconnect"         href="https://fonts.googleapis.com">
+  <link rel="preconnect"         href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <!-- Scripts différés -->
+  <script defer src="js/theme.js"></script>
+  <script defer src="js/slider.js"></script>
+  <script defer src="js/filter.js"></script>
 </head>
 <body>
-  <header>
-    <h1>Mon Portfolio Vidéo</h1>
-    <p>Découvrez mes montages vidéos, extraits de projets récents.</p>
-  </header>
 
-  <section class="videos">
-    <div class="video">
-      <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" allowfullscreen></iframe>
-    </div>
-    <div class="video">
-      <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" allowfullscreen></iframe>
-    </div>
-    <div class="video">
-      <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" allowfullscreen></iframe>
-    </div>
-    <div class="video">
-      <iframe src="https://www.youtube.com/embed/VIDEO_ID_4" allowfullscreen></iframe>
-    </div>
-    <div class="video">
-      <iframe src="https://www.youtube.com/embed/VIDEO_ID_5" allowfullscreen></iframe>
-    </div>
-    <div class="video">
-      <iframe src="https://www.youtube.com/embed/VIDEO_ID_6" allowfullscreen></iframe>
-    </div>
-  </section>
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <video class="hero__bg" autoplay muted loop playsinline src="assets/reel.mp4"></video>
+  <div class="hero__overlay"></div>
+  <div class="hero__content">
+    <img class="logo" src="assets/logos/logo.svg" alt="Logo Learn">
+    <h1>Monteur Vidéo Freelance</h1>
+    <p>Je transforme vos rushes en histoires mémorables.</p>
+    <a href="#contact" class="btn btn--primary">Discutons de votre projet</a>
+  </div>
+</header>
 
-  <footer>
-    © 2025 Ton Nom – Monteur Vidéo | Contact : tonemail@email.com
-  </footer>
+<!-- ================= ABOUT ================= -->
+<section id="about" class="section">
+  <div class="container grid-2">
+    <div>
+      <h2>Qui suis-je&nbsp;?</h2>
+      <p>Salut ! Je m’appelle <strong>Learn</strong>. Depuis 2018 je monte des vidéos
+         pour start-ups parisiennes, ONG togolaises et créateurs YouTube (500 K+).</p>
+      <p>Softs : DaVinci Resolve · Premiere Pro · After Effects.<br>
+         Styles : pub digitale · clip musical · documentaire court.</p>
+      <a href="mailto:learn@email.com" class="btn">CV complet →</a>
+    </div>
+    <img class="about__img" src="assets/thumbs/projet-1.jpg" alt="Learn sur le terrain">
+  </div>
+</section>
+
+<!-- ================= PORTFOLIO (filtrable) ============== -->
+<section id="portfolio" class="section bg-dark">
+  <div class="container">
+    <h2 class="section__title">Projets récents</h2>
+
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">Tous</button>
+      <button class="filter-btn" data-filter="clip">Clips</button>
+      <button class="filter-btn" data-filter="pub">Pubs</button>
+      <button class="filter-btn" data-filter="doc">Docs</button>
+    </div>
+
+    <div class="portfolio-grid" id="portfolioGrid">
+      <article class="card" data-category="clip" data-href="project-midnight.html">
+        <img src="assets/thumbs/projet-1.jpg" alt="">
+        <div class="card__overlay"><h3>Clip “Midnight in Lomé”</h3></div>
+      </article>
+
+      <article class="card" data-category="pub" data-href="project-cafe.html">
+        <img src="assets/thumbs/projet-2.jpg" alt="">
+        <div class="card__overlay"><h3>Pub TikTok – Café Togo</h3></div>
+      </article>
+
+      <!-- Duplique pour + de projets -->
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS SLIDER ================ -->
+<section id="testimonials" class="section">
+  <div class="container">
+    <h2>Témoignages</h2>
+    <div class="slider" id="slider">
+      <div class="slide current">
+        <p>“Learn a compris l’ADN de notre marque en 48 h.”</p>
+        <span>— Kossi, Café Togo</span>
+      </div>
+      <div class="slide">
+        <p>“Montage chirurgical, rythme parfait.”</p>
+        <span>— Awa, YouTube 500 K</span>
+      </div>
+      <div class="slide">
+        <p>“Notre doc a gagné Best Short 2024, thanks !”</p>
+        <span>— Jean, ONG Santé+</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section id="services" class="section">
+  <div class="container">
+    <h2>Services</h2>
+    <ul class="services">
+      <li><span>⚡</span> Montage court-form (Reels, TikTok)</li>
+      <li><span>🎞️</span> Montage long-form (docs 5-45 min)</li>
+      <li><span>✨</span> Motion 2D simple (titres, lower-thirds)</li>
+      <li><span>🎨</span> Color grading (DaVinci)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="section bg-gradient">
+  <div class="container">
+    <h2>Parlons-en</h2>
+    <form id="contactForm" action="https://formspree.io/f/xyzabc" method="POST">
+      <input   type="text"  name="name"     placeholder="Votre nom"    required>
+      <input   type="email" name="_replyto" placeholder="Email"        required>
+      <textarea name="message" rows="5" placeholder="Décrivez votre projet"></textarea>
+      <button type="submit" class="btn btn--primary">Envoyer</button>
+    </form>
+  </div>
+</section>
+
+<!-- ================= THEME TOGGLE ================= -->
+<button id="themeToggle" aria-label="Basculer thème">🌙</button>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <p>© 2025 Learn – Monteur Vidéo à Lomé</p>
+</footer>
+
+<!-- ================= SCRIPTS ================= -->
+<script src="js/main.js"></script>
+<script src="https://unpkg.com/scrollreveal"></script>
+<script>
+  ScrollReveal().reveal('.section__title, .card, .services li', {
+    distance:'40px', origin:'bottom', interval:120
+  });
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('/sw.js');
+  }
+</script>
 </body>
 </html>
+
+
+
+================================================================
+video-portfolio/projects.html
+================================================================
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <title>Tous les Projets · Learn</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/theme.js"></script>
+</head>
+<body>
+<header class="subhero"><h1>Tous les projets</h1></header>
+
+<section class="section">
+  <div class="container grid-list" id="projectList"></div>
+</section>
+
+<script>
+const projects = [
+  {title:'Midnight in Lomé', thumb:'assets/thumbs/projet-1.jpg', href:'project-midnight.html', type:'clip'},
+  {title:'Café Togo',        thumb:'assets/thumbs/projet-2.jpg', href:'project-cafe.html',     type:'pub'}
+  // ...
+];
+document.getElementById('projectList').innerHTML = projects.map(p => `
+  <a class="project-card" href="${p.href}">
+    <img src="${p.thumb}" loading="lazy" alt="">
+    <h3>${p.title}</h3><span>${p.type}</span>
+  </a>
+`).join('');
+</script>
+</body>
+</html>
+
+
+
+================================================================
+video-portfolio/project-midnight.html
+================================================================
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <title>Midnight in Lomé · Étude de cas</title>
+  <meta name="description" content="Étude de cas – clip musical monté par Learn.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/theme.js"></script>
+</head>
+<body>
+<nav class="breadcrumb">
+  <a href="index.html">Accueil</a> / <a href="projects.html">Projets</a> / Midnight
+</nav>
+
+<header class="project-hero">
+  <h1>Midnight in Lomé</h1>
+  <p>Clip musical · 3’12’’ · 2024</p>
+  <video controls src="assets/projects/midnight.mp4"></video>
+</header>
+
+<section class="section">
+  <div class="container grid-2">
+    <div>
+      <h2>Rôle &amp; défi</h2>
+      <ul>
+        <li>Montage multicam 4 K</li>
+        <li>Étalonnage nocturne sous DaVinci</li>
+        <li>FX transitions Glitch</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Résultat</h2>
+      <p>380 K vues organiques, +22 % d’engagement, clip repris sur Trace Africa.</p>
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org",
+ "@type":"VideoObject",
+ "name":"Midnight in Lomé",
+ "description":"Clip musical monté par Learn",
+ "thumbnailUrl":"https://tonsite.com/assets/thumbs/projet-1.jpg",
+ "uploadDate":"2024-02-10",
+ "duration":"PT3M12S"
+}
+</script>
+</body>
+</html>
+
+
+
+================================================================
+video-portfolio/blog.html
+================================================================
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <title>Blog · Learn</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/theme.js"></script>
+</head>
+<body>
+<header class="subhero"><h1>Blog – Backstage du montage</h1></header>
+
+<section class="section">
+  <div class="container" id="blogFeed"></div>
+</section>
+
+<script>
+const posts = [
+  {title:'Making-of Midnight', date:'10 févr 2025', excerpt:'Comment j’ai géré le low-light…', href:'blog/making-of-midnight.html'},
+  {title:'Color grading – 5 hacks', date:'04 jan 2025', excerpt:'Mes LUT maison, télécharge-les…', href:'blog/color-grading-tips.html'}
+];
+document.getElementById('blogFeed').innerHTML = posts.map(p => `
+  <article class="post-preview">
+    <h2><a href="${p.href}">${p.title}</a></h2>
+    <time>${p.date}</time>
+    <p>${p.excerpt}</p>
+  </article>
+`).join('');
+</script>
+</body>
+</html>
+
+
+
+================================================================
+video-portfolio/css/style.css
+================================================================
+/* 0. Variables */
+:root{
+  --clr-primary:#ff5d3a;
+  --clr-dark:#181818;
+  --clr-light:#fdfdfd;
+  --font:'Poppins',sans-serif;
+}
+/* Dark mode overrides */
+[data-theme="dark"]{
+  --clr-primary:#ff7b57;
+  --clr-dark:#fdfdfd;
+  --clr-light:#181818;
+  background:var(--clr-light);
+  color:var(--clr-dark);
+}
+
+/* 1. Reset + body */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);line-height:1.6;color:var(--clr-dark);background:var(--clr-light)}
+
+/* 2. Helpers */
+.section{padding:5rem 0}
+.container{width:min(90%,1100px);margin:auto}
+.btn{display:inline-block;padding:.9rem 1.6rem;border:2px solid var(--clr-primary);
+     color:var(--clr-primary);text-decoration:none;border-radius:4px;transition:.3s}
+.btn:hover{background:var(--clr-primary);color:white}
+.btn--primary{background:var(--clr-primary);color:white;border:none}
+.grid-2{display:grid;gap:2rem;align-items:center}
+@media(min-width:768px){.grid-2{grid-template-columns:repeat(2,1fr)}}
+
+/* 3. Hero */
+.hero{position:relative;height:100vh;overflow:hidden}
+.hero__bg{width:100%;height:100%;object-fit:cover}
+.hero__overlay{position:absolute;inset:0;background:rgba(0,0,0,.45)}
+.hero__content{position:absolute;inset:0;display:grid;place-content:center;text-align:center;color:white;gap:1.2rem}
+.hero h1{font-size:clamp(2.5rem,7vw,4.5rem)}
+
+/* 4. Portfolio grid */
+.portfolio-grid{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.card{position:relative;cursor:pointer}
+.card img{width:100%;display:block;height:100%;object-fit:cover}
+.card__overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);color:white;display:grid;place-content:center;opacity:0;transition:.3s}
+.card:hover .card__overlay{opacity:1}
+
+/* 5. Filters */
+.filters{display:flex;gap:.6rem;margin-bottom:1.2rem}
+.filter-btn{background:none;color:inherit;border:1px solid currentColor;padding:.3rem .9rem;cursor:pointer}
+.filter-btn.active,.filter-btn:hover{background:var(--clr-primary);color:white}
+
+/* 6. Testimonials slider */
+.slider{position:relative;overflow:hidden}
+.slide{opacity:0;transition:.6s ease-in-out}
+.slide.current{opacity:1}
+
+/* 7. Services */
+.services{list-style:none;display:grid;gap:.6rem}
+.services li{display:flex;gap:.6rem;align-items:center}
+
+/* 8. Contact */
+form{display:grid;gap:1rem;max-width:500px;margin:auto}
+input,textarea{padding:.8rem 1rem;border-radius:4px;border:1px solid #ccc;font:inherit}
+
+/* 9. Toggle */
+#themeToggle{position:fixed;bottom:1rem;right:1rem;background:var(--clr-primary);color:white;
+             border:none;padding:.6rem;border-radius:50%;font-size:1.4rem;cursor:pointer}
+
+/* 10. Misc subpages */
+.subhero{background:var(--clr-primary);color:white;padding:4rem 0;text-align:center}
+.grid-list{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.project-card img{width:100%;border-radius:4px}
+.project-card h3{margin-top:.6rem;font-size:1.1rem}
+.project-hero video{width:100%;max-width:800px;display:block;margin:2rem auto 0}
+
+
+
+/================================================================
+video-portfolio/js/main.js
+================================================================
+/* --- Lightbox principal si tu en veux toujours un (facultatif) --- */
+// (La v2 ouvre désormais les cartes sur page-détail, donc lightbox non requis)
+
+
+
+================================================================
+video-portfolio/js/filter.js
+================================================================
+const filterBtns = document.querySelectorAll('.filter-btn');
+const cards      = document.querySelectorAll('.card');
+
+filterBtns.forEach(btn => btn.addEventListener('click', () => {
+  filterBtns.forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const f = btn.dataset.filter;
+  cards.forEach(c => c.style.display =
+      (f === 'all' || c.dataset.category === f) ? '' : 'none');
+}));
+
+/* Click card → navigate to detail page */
+cards.forEach(c =>
+  c.addEventListener('click', () => location.href = c.dataset.href)
+);
+
+
+
+================================================================
+video-portfolio/js/slider.js
+================================================================
+const slides = document.querySelectorAll('#slider .slide');
+let idx = 0;
+setInterval(() => {
+  slides[idx].classList.remove('current');
+  idx = (idx + 1) % slides.length;
+  slides[idx].classList.add('current');
+}, 5000);
+
+
+
+================================================================
+video-portfolio/js/theme.js
+================================================================
+const btn = document.getElementById('themeToggle');
+btn.addEventListener('click', toggleTheme);
+
+function toggleTheme(){
+  const root = document.documentElement;
+  const newTheme = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  root.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+  btn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+}
+
+/* Init on load */
+(() => {
+  const saved = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', saved);
+  btn.textContent = saved === 'dark' ? '☀️' : '🌙';
+})();
+
+
+
+================================================================
+video-portfolio/manifest.webmanifest
+================================================================
+{
+  "name": "Learn – Monteur Vidéo",
+  "short_name": "Learn",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#181818",
+  "theme_color": "#ff5d3a",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+
+
+
+================================================================
+video-portfolio/sw.js
+================================================================
+const CACHE = 'portfolio-v1';
+
+self.addEventListener('install', e => {
+  e.waitUntil(
+    caches.open(CACHE).then(cache =>
+      cache.addAll([
+        '/index.html',
+        '/css/style.css',
+        '/js/filter.js',
+        '/js/slider.js',
+        '/js/theme.js',
+        '/assets/reel.mp4'
+      ])
+    )
+  );
+});
+
+self.addEventListener('fetch', e => {
+  e.respondWith(
+    caches.match(e.request).then(resp => resp || fetch(e.request))
+  );
+});
+
+
